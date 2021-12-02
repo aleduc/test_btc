@@ -1,0 +1,5 @@
+# IDE Project
+.idea/
+
+# macOS
+.DS_Store
