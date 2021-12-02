@@ -10,16 +10,15 @@ import (
 )
 
 const (
-	defaultExchanges = 2
-	BTCUSDTicker Ticker = "BTC_USD"
+	defaultExchanges        = 2
+	BTCUSDTicker     Ticker = "BTC_USD"
 )
 
 // Pool struct for control our producers/consumers.
 type Pool struct {
 	producerCreator ProducerCreator
-	consumer  Consumer
+	consumer        Consumer
 }
-
 
 // Producer write values from PriceStreamSubscriber to output channel.
 type Producer interface {
@@ -55,9 +54,8 @@ func (p *Pool) Start(maxExchanges int, streamSubscriber PriceStreamSubscriber) {
 	for i := 1; i <= maxExchanges; i++ {
 		producer := p.producerCreator.CreateProducer(streamSubscriber)
 		wg.Add(1)
-		go producer.Produce(BTCUSDTicker, resultChan, ctx,  wg)
+		go producer.Produce(BTCUSDTicker, resultChan, ctx, wg)
 	}
-
 
 	termChan := make(chan os.Signal)
 	signal.Notify(termChan, syscall.SIGINT, syscall.SIGTERM)
@@ -68,5 +66,3 @@ func (p *Pool) Start(maxExchanges int, streamSubscriber PriceStreamSubscriber) {
 	close(resultChan)
 	fmt.Println("Graceful shutdown")
 }
-
-

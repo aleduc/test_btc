@@ -21,7 +21,7 @@ func main() {
 	e1 := make(chan error)
 	e2 := make(chan error)
 	e3 := make(chan error)
-	mockStream :=  internal.NewMockPriceStreamSubscriber(ctrl)
+	mockStream := internal.NewMockPriceStreamSubscriber(ctrl)
 	mockStream.EXPECT().SubscribePriceStream(internal.BTCUSDTicker).Return(c1, e1)
 	mockStream.EXPECT().SubscribePriceStream(internal.BTCUSDTicker).Return(c2, e2)
 	mockStream.EXPECT().SubscribePriceStream(internal.BTCUSDTicker).Return(c3, e3)
@@ -83,7 +83,4 @@ func main() {
 
 	pool.Start(2, mockStream)
 
-
 }
-
-

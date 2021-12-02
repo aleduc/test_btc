@@ -1,6 +1,5 @@
 package calculator
 
-
 const (
 	maxPeriod = 60
 	minPeriod = 2
@@ -43,5 +42,3 @@ func (c *Calc) ResetCalculator() {
 func (c *Calc) GetValue() float64 {
 	return c.c.GetValue()
 }
-
-

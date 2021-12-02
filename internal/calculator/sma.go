@@ -9,13 +9,13 @@ type SMA struct {
 	val float64
 }
 
-func NewSMACalculator() *SMA{
+func NewSMACalculator() *SMA {
 	return &SMA{}
 }
 
 func (s *SMA) AddValue(secondNum int, value float64) {
 	s.cnt++
-	s.val = s.val + (value - s.val) / float64(s.cnt)
+	s.val = s.val + (value-s.val)/float64(s.cnt)
 }
 
 func (s *SMA) ResetCalculator() {
@@ -23,7 +23,7 @@ func (s *SMA) ResetCalculator() {
 	s.cnt = 0
 }
 
-func (s *SMA) GetValue() float64{
+func (s *SMA) GetValue() float64 {
 	return s.val
 }
 
@@ -31,12 +31,11 @@ func (s *SMA) GetValue() float64{
 // I could implement some kind of cyclic buffer here, if it were not for the principles in the readme.
 type SMAPeriod struct {
 	period int
-	val []*price
-
+	val    []*price
 }
 
-func NewSMAPeriod(period int) *SMAPeriod{
-	if period > maxPeriod  {
+func NewSMAPeriod(period int) *SMAPeriod {
+	if period > maxPeriod {
 		period = maxPeriod
 	}
 	if period <= 1 {
@@ -48,7 +47,6 @@ func NewSMAPeriod(period int) *SMAPeriod{
 	}
 }
 
-
 func (s *SMAPeriod) AddValue(secondNum int, value float64) {
 	if s.val[secondNum] == nil {
 		s.val[secondNum] = &price{
@@ -58,7 +56,7 @@ func (s *SMAPeriod) AddValue(secondNum int, value float64) {
 		return
 	}
 	s.val[secondNum].val += value
-	s.val[secondNum].cnt +=1
+	s.val[secondNum].cnt += 1
 }
 
 func (s *SMAPeriod) ResetCalculator() {
@@ -69,14 +67,14 @@ func (s *SMAPeriod) ResetCalculator() {
 func (s *SMAPeriod) GetValue() (res float64) {
 	realPeriod := s.period
 	counter := realPeriod
-	for i := len(s.val)-1; i >= 0; i-- {
+	for i := len(s.val) - 1; i >= 0; i-- {
 		if counter == 0 {
 			break
 		}
 		v := s.val[i]
 		if v != nil {
 			res += v.val / float64(v.cnt)
-			counter --
+			counter--
 		}
 	}
 	if counter != 0 {
@@ -87,4 +85,3 @@ func (s *SMAPeriod) GetValue() (res float64) {
 	}
 	return res / float64(realPeriod)
 }
-

@@ -1,5 +1,5 @@
-
 package internal
+
 // I've decided that for a simpler solution I shouldn't use any custom/parametrised struct for ticker.
 //import "time"
 //
@@ -13,5 +13,3 @@ package internal
 //}
 //
 //
-
-

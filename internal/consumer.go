@@ -9,23 +9,23 @@ import (
 	"time"
 )
 
-
 type Time interface {
 	Now() time.Time
 }
 
 type Consume struct {
-	calc calculator.Calculator
-	tim Time
+	calc           calculator.Calculator
+	tim            Time
 	previousMinute time.Time
-	nextMinute time.Time
+	nextMinute     time.Time
 }
 
 func NewConsumer(calc calculator.Calculator) *Consume {
 	return &Consume{
-		calc:           calc,
+		calc: calc,
 	}
 }
+
 // ConsumeResults reads tickerPrices, outputs results.
 func (c *Consume) ConsumeResults(results <-chan TickerPrice, ctx context.Context) {
 	now := time.Now()
@@ -66,7 +66,7 @@ func (c *Consume) fillMinuteRanges(t time.Time) {
 	c.nextMinute = c.previousMinute.Add(time.Minute)
 }
 
-func calculateMinuteDuration(t time.Time) time.Duration{
+func calculateMinuteDuration(t time.Time) time.Duration {
 	return time.Second * time.Duration(config.SecondsInMinute-t.Second())
 }
 
