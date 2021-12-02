@@ -21,7 +21,7 @@ Implements producer.
 1. Gets the channel from PriceStreamSubscriber and then reads the data from the channel.
 1. If the channel is closed, gets a new channel from PriceStreamSubscriber.
 
-###Consumer
+### Consumer
 * The interface responsible for reading the values from our output channel and process them. 
 ##### Consume
 Implements Consumer. In a real task, you should put some logic in separate interfaces.
