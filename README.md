@@ -42,3 +42,6 @@ First ema value = SMA for period(maybe it was not the best choice, and best will
 ##### Pool
 1. Starts producers, consumers and controls them(graceful shutdown).
 
+
+##### Additional comment. 
+I forget to write that I could make several consumers + calculator with storage for async work + some kind of outer, but decided to simplify solution.
